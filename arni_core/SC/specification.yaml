@@ -1,0 +1,7 @@
+arni:
+  specifications:
+    good_frequency: 
+      - c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros:
+          frequency: [165, 200]
+      - c!/receiver4!/uav_1/mavros/local_position/pose!/uav_1/mavros:
+          frequency: [165, 175]

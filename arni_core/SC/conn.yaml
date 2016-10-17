@@ -1,0 +1,59 @@
+arni:
+  countermeasure:
+    constraints:
+      #okay_freq_uav_1:
+        #constraint:
+        #- or:
+            #c!/receiver4!/uav_1/mavros/local_position/pose!/uav_1/mavros: {frequency: ok}
+        #min_reaction_interval: 5
+        #reaction_timeout: 10
+        #reactions:
+          #display_okay_uav_1: {action: publish, autonomy_level: 20, message: frequency of (uav_1) is okay, loglevel: info}
+      #high_freq_uav_1:
+        #constraint:
+        #- and:
+           #c!/receiver4!/uav_1/mavros/local_position/pose!/uav_1/mavros: {frequency: high}
+        #min_reaction_interval: 6
+        #reaction_timeout: 11
+        #reactions:
+          #display_error_high_uav_1: {action: publish, autonomy_level: 20, message: frequency of (uav_1) is high, loglevel: err} 
+          #run_high_stop_uav_1: {action: run, command: rosrun kuri_mbzirc_challenge_3 land_uav_1.py , node: /dummyy}
+      #low_freq_uav_1:
+        #constraint:
+        #- and:
+           #c!/receiver4!/uav_1/mavros/local_position/pose!/uav_1/mavros: {frequency: low}
+        #min_reaction_interval: 7
+        #reaction_timeout: 12
+        #reactions:
+          #display_error_low_uav_1: {action: publish, autonomy_level: 20, message: frequency of (uav_1) is low, loglevel: err} 
+          #run_low_stop_uav_1: {action: run, command: rosrun kuri_mbzirc_challenge_3 land_uav_1.py , node: /dummyy}
+      okay_freq_uav_3:
+        constraint:
+        - or:
+            c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros: {frequency: ok}
+        min_reaction_interval: 5
+        reaction_timeout: 20
+        reactions:
+          display_okay_uav_3: {action: publish, message: Signal health is Good, loglevel: info}
+      high_freq_uav_3:
+        constraint:
+        - and:
+           c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros: {frequency: high}
+        min_reaction_interval: 5
+        reaction_timeout: 30
+        reactions:
+          display_error_high_uav_3: {action: publish, message: Triggering landing action,  loglevel: warn} 
+          run_high_stop_uav_3: {action: run, command: rosrun kuri_mbzirc_challenge_3 land_uav_3.py , node: /dummyy}
+          display_warning: {action: publish, message: Signal strength is above the accepted range,  loglevel: err}
+      low_freq_uav_3:
+        constraint:
+        - and:
+           c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros: {frequency: low}
+        min_reaction_interval: 5
+        reaction_timeout: 30
+        reactions:
+          display_error_low_uav_3: {action: publish, message: Triggering landing action, loglevel: warn} 
+          run_low_stop_uav_3: {action: run, command: rosrun kuri_mbzirc_challenge_3 land_uav_3.py , node: /dummyy}
+          display_warning_2: {action: publish, message: Signal strength is below the accepted range, loglevel: err}
+    #config:
+      

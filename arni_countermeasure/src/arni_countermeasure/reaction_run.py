@@ -17,7 +17,7 @@ class ReactionRun(Reaction):
 
     def execute_reaction(self):
         host_formatted = helper.underscore_ip(self._host)
-        service_name = "/execute_node_reaction/%s" % host_formatted
+        service_name = "/execute_node_reaction/127_0_0_1"
         try:
             if self._host is not None:
                 execute = rospy.ServiceProxy(

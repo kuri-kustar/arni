@@ -1,0 +1,21 @@
+arni:
+  countermeasure:
+    constraints:
+      low_notifier2:
+        constraint:
+        - or:
+            c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros: {frequency: low}
+        min_reaction_interval: 5
+        reaction_timeout: 10
+        reactions:
+          im_telling_an_error: {action: publish, autonomy_level: 20, message: im not getting executed (uav_3), loglevel: err}
+      low_notifier_3:
+        constraint:
+        - and:
+           c!/receiver4!/uav_1/mavros/local_position/pose!/uav_1/mavros: {frequency: low}
+        min_reaction_interval: 6
+        reaction_timeout: 11
+        reactions:
+          im_telling_an_error: {action: publish, autonomy_level: 20, message: im not getting executed (uav_1), loglevel: err} 
+    config:
+      reaction_autonomy_level: 50

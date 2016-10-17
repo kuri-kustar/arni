@@ -1,0 +1,24 @@
+<launch>
+    <!-- clean old configs-->
+    <rosparam command="delete" param="/arni"/>
+
+    <include file="$(find arni_core)/launch/start_arni.xml"/>
+
+    <rosparam file="$(find arni_core)/SC/specification.yaml" command="load"  />
+
+    <rosparam file="$(find arni_core)/SC/cons1.yaml" command="load"/>
+
+ 
+   <group>
+        
+        <node name="receiver3" pkg="kuri_multi_uav_comms" type="receiver3">
+        </node>
+        <node name="receiver4" pkg="kuri_multi_uav_comms" type="receiver4">
+        </node> 
+        <!-- <node name="signal_map" pkg="signal_mapping" type="signal_map">
+        </node>-->
+
+        
+
+    </group> 
+</launch>

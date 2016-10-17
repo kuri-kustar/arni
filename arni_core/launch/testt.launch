@@ -1,0 +1,5 @@
+<launch>
+    <rosparam file="$(find arni_core)/SC/specification.yaml" command="load"  />
+
+ 
+</launch>

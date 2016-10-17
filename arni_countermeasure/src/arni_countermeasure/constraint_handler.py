@@ -20,7 +20,7 @@ import arni_core
 import rospy
 import helper
 import thread
-
+from std_msgs.msg import String
 
 class ConstraintHandler(object):
 
@@ -34,7 +34,7 @@ class ConstraintHandler(object):
         #: Contains a list of all constraints.
         #: :type:   list of Constraints
         self.__constraint_list = list()
-
+	self.pub = rospy.Publisher('error_message', String, queue_size=10)
         #: Contains all incoming rated statistic.
         #: :type:   RatedStatisticStorage
         self.__rated_statistic_storage = rated_statistic_storage
@@ -87,6 +87,7 @@ class ConstraintHandler(object):
                         # run reactions parallel since
                         # they could take some time
                         rospy.loginfo('Running countermeasure %s' % str(constraint))
+                	self.pub.publish("True")
                         thread.start_new_thread(reaction.execute_reaction, ())
                         #reaction.execute_reaction()
 
@@ -172,6 +173,7 @@ class ConstraintHandler(object):
                     autonomy_level, message, loglevel)
 
                 reaction_list.append(react_publish)
+
             else:
                 # not publishing a message? we need a node to execute on!
                 if 'node' in p_reaction:

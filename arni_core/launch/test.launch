@@ -1,0 +1,21 @@
+<launch>
+    <!-- clean old configs-->
+    <rosparam command="delete" param="/arni"/>
+
+    <include file="$(find arni_core)/launch/start_arni.xml"/>
+
+    <rosparam file="$(find arni_core)/SC/specification.yaml" command="load"  />
+
+    <rosparam file="$(find arni_core)/SC/con2.yaml" command="load"/>
+
+ 
+   <group>
+        
+        <node name="receiver3" pkg="task3_a" type="receiver3">
+        </node>
+        <node name="receiver4" pkg="task3_a" type="receiver4">
+        </node>
+        
+
+    </group> 
+</launch>
