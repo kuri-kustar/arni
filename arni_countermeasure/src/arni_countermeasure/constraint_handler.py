@@ -34,7 +34,7 @@ class ConstraintHandler(object):
         #: Contains a list of all constraints.
         #: :type:   list of Constraints
         self.__constraint_list = list()
-	self.pub = rospy.Publisher('error_message', String, queue_size=10)
+	#self.pub = rospy.Publisher('error_message', String, queue_size=10)
         #: Contains all incoming rated statistic.
         #: :type:   RatedStatisticStorage
         self.__rated_statistic_storage = rated_statistic_storage
@@ -46,6 +46,8 @@ class ConstraintHandler(object):
         self._read_param_reaction_autonomy_level()
 
         self._read_param_constraints()
+        
+        self.pub = rospy.Publisher('error_message', String, queue_size=10)
 
     def add_constraint(self, constraint):
         """Add an constraint to the list of constraints.
@@ -87,8 +89,12 @@ class ConstraintHandler(object):
                         # run reactions parallel since
                         # they could take some time
                         rospy.loginfo('Running countermeasure %s' % str(constraint))
-                	self.pub.publish("True")
                         thread.start_new_thread(reaction.execute_reaction, ())
+                        if(str(constraint) == "high_freq_uav_3" or str(constraint) == "low_freq_uav_3" ):
+			  self.pub.publish("True")
+			  rospy.loginfo("*******************************I published error*************************************")
+			  
+			  
                         #reaction.execute_reaction()
 
                 # tell constraint to reset timers
@@ -192,6 +198,7 @@ class ConstraintHandler(object):
                     react_restart = ReactionRestartNode(node, autonomy_level)
                     reaction_list.append(react_restart)
                 elif action == 'run':
+		    
                     if not 'command' in p_reaction:
                         rospy.logwarn(
                             "There is no Command defined in run-reaction"
