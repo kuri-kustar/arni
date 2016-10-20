@@ -6,7 +6,7 @@ arni:
         - or:
             c!/receiver3!/uav_3/mavros/local_position/pose!/uav_3/mavros: {frequency: ok}
         min_reaction_interval: 5
-        reaction_timeout: 50
+        reaction_timeout: 20
         reactions:
           display_okay_uav_3: {action: publish, message: Signal health is Good, loglevel: info}
       high_freq_uav_3:
